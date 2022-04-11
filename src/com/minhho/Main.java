@@ -1,9 +1,6 @@
 package com.minhho;
 
-import com.minhho.arrays.ArrayOfProducts;
-import com.minhho.arrays.FirstDuplicateValue;
-import com.minhho.arrays.LongestPeak;
-import com.minhho.arrays.SpiralTraverse;
+import com.minhho.arrays.*;
 
 public class Main {
 
@@ -11,6 +8,7 @@ public class Main {
 //        SpiralTraverse.run();
 //        LongestPeak.runTest();
 //        ArrayOfProducts.runTest();
-        FirstDuplicateValue.runTest();
+//        FirstDuplicateValue.runTest();
+        MergeOverlappingIntervals.runTest();
     }
 }
