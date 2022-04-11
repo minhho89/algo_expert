@@ -5,6 +5,7 @@ package com.minhho.arrays;
  */
 public class ArrayOfProducts {
 
+    // O(n^2)
     public static int[] arrayOfProducts(int[] array) {
         // result array with length equals to input array
         int[] result = new int[array.length];
