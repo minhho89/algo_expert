@@ -1,56 +1,69 @@
 package com.minhho.arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MergeOverlappingIntervals {
     public static int[][] mergeOverlappingIntervals(int[][] intervals) {
 
-        System.out.println(intervals.length);
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
-        ArrayList<Integer[]> list = new ArrayList<>();
+        ArrayList<int[]> list = new ArrayList<>();
 
-        int[][] result = new int[intervals.length][2];
-        System.out.println(result.length);
-        result[0] = intervals[0];
+        list.add(intervals[0]);
         int j = 1;
-        for (int i = 0; i < result.length; i++) {
-            if (isOverlap(result[i], intervals[j])) {
-                while (isOverlap(result[i], intervals[j])) {
-                    result[i] = merge(result[i], intervals[j]);
+
+        while (j < intervals.length) {
+            int lastIndex =list.size() - 1;
+
+            if (isOverlap(list.get(lastIndex), intervals[j])) {
+                while (isOverlap(list.get(lastIndex), intervals[j])) {
+                    list.set(lastIndex,merge(list.get(lastIndex), intervals[j]));
                     j++;
+                    if (j == intervals.length) break;
                 }
             } else {
-                if (i == 0) {
-                    result[i + 1] = intervals[j];
-                } else {
-                    result[i] = intervals[j];
-                }
+                list.add(intervals[j]);
                 j++;
             }
 
-            if (j == intervals.length) break;
         }
 
-        return result;
+
+        return list.toArray(new int[list.size()][]);
     }
 
     public static boolean isOverlap(int[] array1, int[] array2) {
-        int lastIndexArr1 = 1;
-        int firstIndexArr2 = 0;
 
-        return (array2[firstIndexArr2] <= array1[lastIndexArr1]);
+        if (array2[0] <= array1[1]) return true;
+        return false;
     }
 
     public static int[] merge(int[] array1, int[] array2) {
-        if (isOverlap(array1, array2)) {
-            return new int[]{array1[0], array2[array2.length - 1]};
+        if (array1[0] <= array2[0] && array2[1] <= array1[1]){
+            return new int[]{array1[0], array1[1]};
+        }
+
+        if (array1[0] <= array2[0] && array1[1] <= array2[1]){
+            return new int[]{array1[0], array2[1]};
+        }
+
+        if (array2[0] <= array1[0] && array1[1] <= array2[1]) {
+            return new int[]{array2[0], array2[1]};
+        }
+
+        if (array2[0] <= array1[0] && array2[1] <= array1[1]) {
+            return new int[]{array2[0], array1[1]};
         }
 
         return new int[]{};
     }
 
     public static void runTest() {
-        int[][] result = mergeOverlappingIntervals(new int[][]{{1,2},{3,5},{4,7},{6,8},{9, 10}});
+        int[][] result = mergeOverlappingIntervals(new int[][]{{20, 21},{22, 23},
+                {0, 1}, {3,4}, {23,24}, {25,27}, {5,6}, {7, 19}});
 
         for (int[] array:
              result) {
