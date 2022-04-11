@@ -2,6 +2,9 @@ package com.minhho.arrays;
 
 import java.util.ArrayList;
 
+/**
+ * By MinhHo 2022/10/04
+ */
 public class LongestPeak {
     public static int longestPeak(int[] array) {
 
