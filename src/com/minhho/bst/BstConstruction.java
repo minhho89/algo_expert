@@ -34,8 +34,20 @@ public class BstConstruction {
         }
     
         public boolean contains(int value) {
-          // Write your code here.
-          return false;
+
+            if (value < this.value) {
+                // left
+                if (this.left == null) return false;
+                return left.contains(value);
+            } else if (value > this.value) {
+                // right
+                if (this.right == null) return false;
+                return right.contains(value);
+            } else {
+                // equal
+                return true;
+            }
+    
         }
     
         public BST remove(int value) {

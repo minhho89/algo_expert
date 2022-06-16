@@ -16,7 +16,18 @@ public class Main {
 
         bst.insert(5);
         bst.insert(15);
+        bst.insert(2);
+        bst.insert(5);
+        bst.insert(1);
+        bst.insert(13);
+        bst.insert(22);
+        bst.insert(14);
 
         bst.print("", bst, false);
+
+        System.out.println(bst.contains(10));
+        System.out.println(bst.contains(14));
+        System.out.println(bst.contains(5));
+        System.out.println(bst.contains(100));
     }
 }
