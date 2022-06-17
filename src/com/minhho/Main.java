@@ -25,9 +25,7 @@ public class Main {
 
         bst.print("", bst, false);
 
-        System.out.println(bst.contains(10));
-        System.out.println(bst.contains(14));
-        System.out.println(bst.contains(5));
-        System.out.println(bst.contains(100));
+        bst.remove(10);
+        bst.print("", bst, false);
     }
 }

@@ -51,10 +51,56 @@ public class BstConstruction {
         }
     
         public BST remove(int value) {
-          // Write your code here.
-          // Do not edit the return statement of this method.
+          remove(value, null);
           return this;
         }
+
+
+        public BST remove(int value, BST parent) {
+            if (value < this.value) {
+                // traverse left
+                left.remove(value, this);
+            } else if (value > this.value) {
+                // traverse right
+                right.remove(value, this);
+            } else {
+                // found it!
+                if (left != null && right != null) {
+                    this.value = right.getMinValue();
+                    right.remove(this.value, this);
+                } else if (parent == null) {
+                    // remove root
+                    if (this.left != null) {
+                        this.value = this.left.value;
+                        this.right = this.left.right;
+                        this.left = this.left.left;
+                       
+                    } else if (this.right != null) {
+                        this.value = this.right.value;
+                        this.left = this.right.left;
+                        this.right = this.right.right;
+                    } else {
+                        // one node tree
+                    }
+                } else if (parent.left == this) {
+                    parent.left = this.left != null ? this.left : this.right;
+                } else if (parent.right == this) {
+                    parent.right = this.left != null ? this.left : this.right;
+
+                }
+            }
+            return this;
+        }
+
+        public int getMinValue() {
+            if (left == null) {
+                return this.value;
+            } else {
+                return left.getMinValue();
+            }
+        }
+
+
         public void print(String prefix, BST n, boolean isLeft) {
             if (n != null) {
                 print(prefix + "     ", n.right, false);
